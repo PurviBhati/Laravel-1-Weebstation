@@ -77,6 +77,8 @@ Route::middleware('auth:customer')->group(function () {
         Route::post('/{order}/reorder', 'reorder')->name('reorder');
         Route::get('/{order}/pay', 'pay')->name('pay');
         Route::post('/{order}/pay', 'processPay')->name('pay.process');
+        Route::get('/{order}/address', 'editAddress')->name('address');
+        Route::put('/{order}/address', 'updateAddress')->name('address.update');
     });
 });
 
@@ -86,7 +88,7 @@ Route::get('product/{product}', [ShopController::class, 'show']);
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'login']);
-    Route::get('/register', [AuthController::class, 'showRegister']);
+    Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
     Route::post('/register', [AuthController::class, 'register']);
 });
 
@@ -133,6 +135,12 @@ Route::middleware('auth')->prefix('admin')->group(function () {
         Route::delete('/{invoice}', 'destroy')->name('destroy');
     });
 
-    Route::get('/orders', [AdminOrderController::class, 'index'])->name('admin.orders.index');
-    Route::get('/orders/{order}', [AdminOrderController::class, 'show'])->name('admin.orders.show');
+    Route::controller(AdminOrderController::class)->prefix('orders')->name('admin.orders.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/{order}', 'show')->name('show');
+        Route::patch('/{order}/status', 'updateStatus')->name('status');
+        Route::post('/{order}/cancel', 'cancel')->name('cancel');
+        Route::post('/{order}/address-seen', 'addressSeen')->name('address-seen');
+    });
+
 });

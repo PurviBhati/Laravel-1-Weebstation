@@ -91,7 +91,7 @@ class CartController extends Controller
         $cart = CartStore::get();
 
         if (! isset($cart[$key])) {
-            return redirect()->route('cart.index');
+            return redirect()->route('user.cart.index');
         }
 
         $wanted = (int) $request->input('quantity');
@@ -99,7 +99,7 @@ class CartController extends Controller
 
         if ($available < 1) {
             return redirect()
-                ->route('cart.index')
+                ->route('user.cart.index')
                 ->with('error', 'This item is out of stock now. Please remove it.');
         }
 
@@ -110,11 +110,11 @@ class CartController extends Controller
 
         if ($quantity < $wanted) {
             return redirect()
-                ->route('cart.index')
+                ->route('user.cart.index')
                 ->with('error', "Only {$available} available, so the quantity was set to {$available}.");
         }
 
-        return redirect()->route('cart.index')->with('success', 'Cart updated.');
+        return redirect()->route('user.cart.index')->with('success', 'Cart updated.');
     }
 
     public function remove(string $key)

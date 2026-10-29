@@ -466,7 +466,7 @@
                     <span class="btn is-off" aria-disabled="true">Checkout: coming next</span>
                 @endif
 
-                <p class="summary-note">
+                <p class="summary-note" style=" color: rgba(122, 100, 85, 0.82);">
                     Your cart is saved on this device for a while. Stock is checked again at checkout.
                 </p>
             </aside>

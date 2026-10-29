@@ -49,6 +49,28 @@ class UserShoppingRoutesTest extends TestCase
         $this->put('/account/profile')->assertRedirect('/account/login');
     }
 
+    public function test_customer_address_routes_resolve_to_edit_and_update_actions(): void
+    {
+        $editRoute = Route::getRoutes()->match(Request::create('/user/orders/1/address'));
+        $updateRoute = Route::getRoutes()->match(Request::create('/user/orders/1/address', 'PUT'));
+
+        $this->assertSame('orders.address', $editRoute->getName());
+        $this->assertSame(
+            'App\Http\Controllers\OrderController@editAddress',
+            $editRoute->getActionName(),
+        );
+        $this->assertSame('orders.address.update', $updateRoute->getName());
+        $this->assertSame(
+            'App\Http\Controllers\OrderController@updateAddress',
+            $updateRoute->getActionName(),
+        );
+    }
+
+    public function test_registration_page_has_the_route_name_used_by_the_welcome_view(): void
+    {
+        $this->assertSame('/register', route('register', [], false));
+    }
+
     public function test_admin_and_customer_order_routes_generate_separate_urls(): void
     {
         $this->assertSame('/user/orders', route('orders.index', [], false));

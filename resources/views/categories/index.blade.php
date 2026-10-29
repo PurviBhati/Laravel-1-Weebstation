@@ -267,7 +267,7 @@
 
         <h1>Categories</h1>
 
-        <p class="cats-desc">
+        <p class="cats-desc" style=" color: rgba(122, 100, 85, 0.73);">
             Pick a category to see everything in it, or browse all of
             {{ $audienceLabel === 'Everyone' ? 'our unisex' : "the " . strtolower($audienceLabel) . "'s" }} collection.
         </p>

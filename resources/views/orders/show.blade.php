@@ -1,10 +1,10 @@
 @extends('layouts.storefront')
 
+@include('partials.ws-ui')
+
 @section('title', $order->order_number . ' | WEEB STATION')
 
 @section('account')
-
-@include('partials.ws-ui')
 
 @php
     $statusBadge = [
@@ -35,8 +35,7 @@
         && $order->status !== 'cancelled';
 
     $canCancel = in_array($order->status, ['pending', 'confirmed'], true);
-
-    // Progress steps
+    $canChangeAddress = $canCancel;
     $steps = [
         'pending'   => 'Order placed',
         'confirmed' => 'Confirmed',
@@ -142,7 +141,6 @@
 <p class="ui-sub" style="margin-bottom: 14px;">
     Placed on {{ $order->created_at->format('d M Y, h:i A') }}
 </p>
-
 <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 22px;">
     <span class="ui-badge {{ $statusClass }}">{{ $statusText }}</span>
     <span class="ui-badge {{ $payClass }}">{{ $payText }}</span>
@@ -152,7 +150,9 @@
 <div class="ui-card">
     @if ($order->status === 'cancelled')
         <div class="ord-cancelled">
-            <strong>This order was cancelled.</strong>
+            <strong>
+                This order was cancelled{{ $order->cancelled_by === 'admin' ? ' by the shop' : '' }}.
+            </strong>
             @if ($order->payment_status === 'refunded')
                 <br>Your payment has been refunded (demo).
             @endif
@@ -263,6 +263,18 @@
                 <p class="ui-sub" style="margin: 14px 0 0; font-size: 0.85rem;">
                     Your note: {{ $order->notes }}
                 </p>
+            @endif
+
+            @if ($order->address_updated_at)
+                <p class="ui-sub" style="margin: 14px 0 0; font-size: 0.85rem;">
+                    Address updated on {{ $order->address_updated_at->format('d M Y, h:i A') }}.
+                </p>
+            @endif
+
+            @if ($canChangeAddress)
+                <a href="{{ route('orders.address', $order) }}" class="ui-btn ui-btn--ghost" style="margin-top: 14px; min-height: 42px;">
+                    Change address
+                </a>
             @endif
         </div>
 

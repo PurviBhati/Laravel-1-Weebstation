@@ -561,11 +561,18 @@
                         <span class="nav-icon">💰</span>
                         <span>Sales</span>
                     </a>
-                
-                    <a href="/admin/orders/"
-                        class="nav-link {{ request()->is('admin/orders*') ? 'active' : '' }}">
-                            <span class="nav-icon"></span>
-                            <span>Orders</span>
+                    @php
+                        $attention = \App\Models\Order::where('status', 'pending')->count();
+                    @endphp
+
+                    <a href="/admin/orders" class="nav-link {{ request()->is('admin/orders*') ? 'active' : '' }}">
+                        <span class="nav-icon">📦</span>
+                        <span>
+                            Orders
+                            @if ($attention > 0)
+                                <strong style="color:#f87171;">({{ $attention }})</strong>
+                            @endif
+                        </span>
                     </a>
                 </nav>
 

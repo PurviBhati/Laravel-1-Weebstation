@@ -20,6 +20,7 @@
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 14px;
+        width: 60%;
         margin-bottom: 20px;
     }
 
@@ -27,7 +28,7 @@
         padding: 18px;
         border: 1px solid var(--u-border);
         border-radius: 14px;
-        background: rgba(255, 217, 191, 0.05);
+        background: rgba(122, 100, 85, 0.56);
     }
 
     .acct-stat strong {
@@ -90,7 +91,7 @@
         <span>In wishlist</span>
     </div>
 </div>
-<div class="ui-card">
+<div class="ui-card" style=" background: rgba(122, 100, 85, 0.56);">
     <div class="acct-head">
         <h2>Recent orders</h2>
 
@@ -135,7 +136,7 @@
     @endif
 </div>
 
-<div class="ui-card">
+<div class="ui-card" style=" background: rgba(122, 100, 85, 0.56);">
     <div class="acct-head">
         <h2>Delivery address</h2>
         <a href="{{ route('account.profile') }}">{{ $customer->address ? 'Change' : 'Add' }} &rarr;</a>

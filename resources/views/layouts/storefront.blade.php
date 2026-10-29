@@ -127,6 +127,13 @@
             align-items: center;
             gap: 14px;
             font-size: 13px;
+            white-space: nowrap;
+        }
+
+        .site-actions form {
+            display: flex;
+            align-items: center;
+            margin: 0;
         }
 
         .site-actions a:hover {
@@ -277,8 +284,7 @@
                     <a href="{{ route('account.index') }}" class="site-hide-small">
                         Hi, {{ \Illuminate\Support\Str::words(auth('customer')->user()->name, 1, '') }}
                     </a>
-                    &nbsp;
-                    <form method="POST" action="{{ route('account.logout') }}" style="display:inline;">
+                    <form method="POST" action="{{ route('account.logout') }}">
                         @csrf
                         <button type="submit" class="site-link-button site-hide-small">Logout</button>
                     </form>
@@ -317,7 +323,7 @@
     @endif
 
     <main>
-         @yield('account')
+        @yield('account')
         @yield('content')
     </main>
 
