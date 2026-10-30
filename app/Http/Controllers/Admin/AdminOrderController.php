@@ -38,7 +38,7 @@ class AdminOrderController extends Controller
             )
             ->when(
                 $status === 'address',
-                fn ($query) => $query->unseenAddressChange()
+                fn ($query) => $query->whereNotNull('address_updated_at')
             )
             ->when($search !== '', function ($query) use ($search) {
                 $query->where(function ($where) use ($search) {
@@ -60,7 +60,8 @@ class AdminOrderController extends Controller
 
         $totalCount = Order::count();
 
-        $addressCount = Order::unseenAddressChange()->count();
+        $addressCount = Order::whereNotNull('address_updated_at')
+            ->count();
 
         return view('admin.orders.index', [
             'orders' => $orders,
@@ -170,22 +171,6 @@ class AdminOrderController extends Controller
                 'success',
                 'Order cancelled and its stock was put back.'
                 .($result ? ' Remember to refund the payment.' : '')
-            );
-    }
-
-    public function addressSeen(Order $order): RedirectResponse
-    {
-        $updated = Order::unseenAddressChange()
-            ->whereKey($order->id)
-            ->update(['address_seen_at' => now()]);
-
-        return redirect()
-            ->route('admin.orders.show', $order)
-            ->with(
-                $updated > 0 ? 'success' : 'error',
-                $updated > 0
-                    ? 'The customer address update was marked as seen.'
-                    : 'There is no unread address update to mark as seen.',
             );
     }
 }

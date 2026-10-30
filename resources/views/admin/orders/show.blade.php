@@ -161,28 +161,15 @@
 @endif
 
 {{-- The customer changed the address --}}
-@if ($order->hasUnseenAddressChange())
+@if ($order->address_updated_at)
     <div class="o-notice address">
         <strong>Address updated</strong>
-        by the customer on {{ $order->address_updated_at->format('d M Y, h:i A') }}.
+        by the customer on
+        {{ $order->address_updated_at->format('d M Y, h:i A') }}.
 
         <p style="margin: 6px 0 0;">
             Please ship to the delivery address shown below.
         </p>
-
-        @if ($order->previous_address)
-            <span class="old">Previous address: {{ $order->previous_address }}</span>
-        @endif
-
-        <form method="POST" action="{{ route('admin.orders.address-seen', $order) }}" style="margin-top: 10px;">
-            @csrf
-            <button type="submit" class="btn btn-light">Mark as seen</button>
-        </form>
-    </div>
-@elseif ($order->address_updated_at)
-    <div class="o-notice address">
-        The customer updated the address on
-        {{ $order->address_updated_at->format('d M Y, h:i A') }}.
     </div>
 @endif
 

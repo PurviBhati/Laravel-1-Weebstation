@@ -154,7 +154,6 @@ class CustomerAuthController extends Controller
     private function issueCode(string $type, string $value): bool
     {
         $limiter = 'otp-send:'.$value;
-
         if (RateLimiter::tooManyAttempts($limiter, 5)) {
             return false;
         }

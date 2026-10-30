@@ -197,7 +197,7 @@
                                 </span>
                             @endif
 
-                            @if ($order->hasUnseenAddressChange())
+                            @if ($order->address_updated_at)
                                 <br>
                                 <span class="o-badge flag" style="margin-top: 4px;">
                                     Address updated

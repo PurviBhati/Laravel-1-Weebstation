@@ -313,7 +313,7 @@
                 <h2>Playing it safe<br>is so last season.</h2>
                 <p>Build your rotation around pieces you actually love. Experiment, mix it up, and make the fit your own.</p>
             </div>
-            <a href="/shop" class="ws-btn">Find your next fit <span aria-hidden="true">↗</span></a>
+            <a href="/shop/categories" class="ws-btn">Find your next fit <span aria-hidden="true">↗</span></a>
         </div>
     </section>
 
@@ -351,7 +351,7 @@
             <span class="ws-eyebrow">This is your sign</span>
             <h2>Your fit.<br>Your statement.</h2>
             <p>Stop saving the looks. Start making them your own. Your next favourite piece is waiting.</p>
-            <a href="/shop" class="ws-btn">Explore WEEB STATION <span aria-hidden="true">↗</span></a>
+            <a href="/shop/categories" class="ws-btn">Explore WEEB STATION <span aria-hidden="true">↗</span></a>
         </div>
     </section>
 </div>

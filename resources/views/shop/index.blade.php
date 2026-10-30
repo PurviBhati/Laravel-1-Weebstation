@@ -529,8 +529,8 @@
         {{-- Count, category filter and sorting --}}
         <div class="ws-shop__toolbar">
 
-            <p class="ws-shop__count" style="color: #4a0a0f;">
-                Showing <strong style="color: #aa4e56;">{{ $products->count() }}</strong>
+            <p class="ws-shop__count" style="color: #daa4a8;">
+                Showing <strong style="color: #665246;">{{ $products->count() }}</strong>
                 {{ $products->count() === 1 ? 'product' : 'products' }}
             </p>
 
@@ -610,12 +610,7 @@
                         @endif
 
                         @if ($firstImage && $firstImage->path)
-                            <img
-                                src="{{ asset('storage/' . $firstImage->path) }}"
-                                alt="{{ $product->name }}"
-                                loading="lazy"
-                                onerror="this.style.display='none'; this.nextElementSibling.hidden=false;"
-                            >
+                            <img src="{{ asset('storage/' . $firstImage->path) }}" alt="{{ $product->name }}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.hidden=false;">
 
                             <div class="ws-product-card__placeholder" hidden>
                                 <strong>WS.</strong>

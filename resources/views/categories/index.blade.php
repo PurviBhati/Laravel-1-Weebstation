@@ -334,7 +334,7 @@
             @endforeach
         </div>
 
-        <a href="{{ url('/shop/' . $audience) }}" class="cats-all">
+        <a href="{{ url('/shop/' . $audience) }}" class="cats-all" style="color: #94735494;">
             See all {{ strtolower($audienceLabel) }} products &rarr;
         </a>
 

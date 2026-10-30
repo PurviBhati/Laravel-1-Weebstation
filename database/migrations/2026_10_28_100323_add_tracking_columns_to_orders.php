@@ -25,18 +25,6 @@ return new class extends Migration
                 $table->timestamp('address_updated_at')->nullable();
             });
         }
-
-        if (! Schema::hasColumn('orders', 'address_seen_at')) {
-            Schema::table('orders', function (Blueprint $table) {
-                $table->timestamp('address_seen_at')->nullable();
-            });
-        }
-
-        if (! Schema::hasColumn('orders', 'previous_address')) {
-            Schema::table('orders', function (Blueprint $table) {
-                $table->text('previous_address')->nullable();
-            });
-        }
     }
 
     public function down(): void
@@ -48,8 +36,6 @@ return new class extends Migration
                 'cancelled_at',
                 'cancelled_by',
                 'address_updated_at',
-                'address_seen_at',
-                'previous_address',
             ] as $column) {
                 if (Schema::hasColumn('orders', $column)) {
                     $columns[] = $column;
